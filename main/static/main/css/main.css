@@ -1,0 +1,22 @@
+body {
+    font-family: 'Montserrat';
+    font-size: 16px;
+    background-color: #212529;
+}
+
+.dropdown-menu {
+    background-color: #212529;
+    border: none;
+}
+
+.dropdown-item {
+    color: #fff;
+}
+
+.dropdown-divider {
+    background-color: gray;
+}
+
+h5 {
+    color: white;
+}

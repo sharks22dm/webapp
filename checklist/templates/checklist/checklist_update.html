@@ -1,0 +1,40 @@
+{% extends "main/base.html" %}
+
+{% block title %} Задания к чек-листу {% endblock %}
+
+{% block content %}
+<div class="card bg-dark text-light border-0">
+    <form method="post">
+        {% csrf_token %}
+        <div class="col-md-6 offset-md-3 col-12" style="padding: 10px;">
+            <div style="display: flex; justify-content: space-between;">
+                <div style="width: 30%;">
+                    {{ form_task.assigned_to }}
+                </div>
+                <div style="width: 30%;">
+                    {{ form_task.description }}
+                </div>
+            </div>
+            <br>
+
+            <div style="width: 100%;">
+                <button type="submit" class="btn btn-success" style="width: 100%;">Добавить задачу</button>
+            </div>
+        </div>
+    </form>
+</div>
+{% if tasks %}
+{% for task in tasks %}
+<div class="alert alert-dark">
+    {{ task.assigned_to }} - {{ task.description }}
+    <a href="{% url 'task_update' task.id %}">
+        <button class="btn btn-success">Редактировать</button>
+    </a>
+    <form method="post" action="{% url 'task_delete' task.id %}">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Удалить</button>
+    </form>
+</div>
+{% endfor %}
+{% endif %}
+{% endblock %}

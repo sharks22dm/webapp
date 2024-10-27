@@ -1,0 +1,53 @@
+{% extends "main/base.html" %}
+
+{% block title %} Создание чек-листа в Сервисе {% endblock %}
+
+{% block content %}
+<div class="card bg-dark text-light border-0">
+    <form method="post">
+        {% csrf_token %}
+        <div class="col-md-6 offset-md-3 col-12" style="padding: 10px;">
+            <div style="display: flex; justify-content: space-between;">
+                <div style="width: 30%;">
+                    {{ form_checklist.dep }}
+                </div>
+                <div style="width: 30%;">
+                    {{ form_checklist.title }}
+                </div>
+                <div style="width: 30%;">
+                    {{ form_checklist.date }}
+                </div>
+            </div>
+            <br>
+
+            <div style="width: 100%;">
+                <button type="submit" class="btn btn-success" style="width: 100%;">Создать</button>
+            </div>
+        </div>
+    </form>
+</div>
+{% if checklists %}
+<div class="col">
+    <h5>Сервис</h5>
+    {% for checklist in checklists %}
+    {% if checklist.dep == 'Сервис' %}
+    <div class="alert alert-dark">
+        {{ checklist.title }} - {{ checklist.date }}
+        <a href="{% url 'checklist_view' checklist.id %}">
+            <button class="btn btn-primary">Просмотр</button>
+        </a>
+        <a href="{% url 'checklist_update_name' checklist.id %}">
+            <button class="btn btn-warning">Редактировать</button>
+        </a>
+        <a href="{% url 'checklist_update' checklist.id %}">
+            <button class="btn btn-success">Редактировать задания</button>
+        </a>
+        <a href="{% url 'checklist_delete' checklist.id %}">
+            <button class="btn btn-danger">Удалить</button>
+        </a>
+    </div>
+    {% endif %}
+    {% endfor %}
+</div>
+{% endif %}
+{% endblock %}

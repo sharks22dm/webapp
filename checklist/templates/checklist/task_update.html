@@ -1,0 +1,17 @@
+{% extends "main/base.html" %}
+
+{% block title %} Редактирование задания {% endblock %}
+
+{% block content %}
+<div class="card bg-dark text-light border-0">
+    <form method="post">
+        {% csrf_token %}
+        <div class="col-md-6 offset-md-3 col-12" style="padding: 10px;">
+            {{ form_task.as_p }}
+            <div style="width: 100%;">
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Сохранить задание</button>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends "main/base.html" %}
+
+{% block title %} Просмотр чек-листа {% endblock %}
+
+{% block content %}
+<h5>Просмотр чек-листа</h5>
+<div class="container">
+    <div class="row row-cols-1 row-cols-lg-2">
+        <div class="col">
+            <h5>Задания</h5>
+            {% if tasks %}
+            {% for task in tasks %}
+            {% if not task.completed %}
+            <div class="alert alert-dark">
+                <p>{{ task.assigned_to }} - {{ task.description }}</p>
+                <form method="post" action="{% url 'task_completed' pk=task.pk %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Выполнено</button>
+                </form>
+            </div>
+            {% endif %}
+            {% endfor %}
+            {% endif %}
+        </div>
+        <div class="col">
+            <h5>Выполнено</h5>
+            {% if tasks %}
+            {% for task in tasks %}
+            {% if task.completed %}
+            <div class="alert alert-dark">
+                <p>{{ task.assigned_to }} - {{ task.description }}</p>
+                <form method="post" action="{% url 'task_list' pk=task.pk %}">
+                    {% csrf_token %}
+                    <button type="submit" style="background: none; border: none;">Вернуть</button>
+                </form>
+            </div>
+            {% endif %}
+            {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends "main/base.html" %}
+
+{% block title %} Редактирование чек-листа {% endblock %}
+
+{% block content %}
+<input type="hidden" name="original_checklist_id" value="{{ checklist.id }}">
+<div class="card bg-dark text-light border-0">
+    <form method="post">
+        {% csrf_token %}
+        <div class="col-md-6 offset-md-3 col-12" style="padding: 10px;">
+            <div style="display: flex; justify-content: space-between;">
+                <div style="width: 30%;">
+                    {{ form_checklist.dep }}
+                </div>
+                <div style="width: 30%;">
+                    {{ form_checklist.title }}
+                </div>
+                <div style="width: 30%;">
+                    {{ form_checklist.date }}
+                </div>
+            </div>
+            <br>
+
+            <div style="width: 100%;">
+                <button type="submit" class="btn btn-success" style="width: 100%;">Сохранить</button>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}
