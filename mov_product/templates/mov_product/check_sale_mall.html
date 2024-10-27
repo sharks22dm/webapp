@@ -1,0 +1,55 @@
+{% extends "main/base.html" %}
+
+{% block title %} Проверка продаж в Молле {% endblock %}
+
+{% block content %}
+<h5>Проверка продаж в Молле</h5>
+<div class="card bg-dark text-light border-0">
+    <form action="{% url 'check_sale_mall' %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="from_dep" value="Сервис">
+        <input type="hidden" name="to_dep" value="Молл">
+        <input type="hidden" name="status" value="Ожидает сборки">
+        <label for="product">Заказать из Сервиса:</label>
+        <input type="text" id="product" name="product">
+        <label for="total">Кол-во:</label>
+        <input type="number" id="total" name="total">
+        <button type="submit">Отправить</button>
+    </form>
+    <br>
+    <form action="{% url 'check_sale_mall' %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="from_dep" value="Плазма">
+        <input type="hidden" name="to_dep" value="Молл">
+        <input type="hidden" name="status" value="Ожидает сборки">
+        <label for="product">Заказать из Плазмы:</label>
+        <input type="text" id="product" name="product">
+        <label for="total">Кол-во:</label>
+        <input type="number" id="total" name="total">
+        <button type="submit">Отправить</button>
+    </form>
+    <br>
+    <form action="{% url 'check_sale_mall' %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="from_dep" value="Нагорное">
+        <input type="hidden" name="to_dep" value="Молл">
+        <input type="hidden" name="status" value="Ожидает сборки">
+        <label for="product">Заказать из Нагорного:</label>
+        <input type="text" id="product" name="product">
+        <label for="total">Кол-во:</label>
+        <input type="number" id="total" name="total">
+        <button type="submit">Отправить</button>
+    </form>
+    <br>
+    <form action="{% url 'check_sale_mall' %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="from_dep" value="Молл">
+        <input type="hidden" name="to_dep" value="Молл">
+        <input type="hidden" name="total" value="1">
+        <input type="hidden" name="status" value="Ожидает сборки">
+        <label for="product">Проверка витрины:</label>
+        <input type="text" id="product" name="product">
+        <button type="submit">Отправить</button>
+    </form>
+</div>
+{% endblock %}

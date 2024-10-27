@@ -1,0 +1,41 @@
+{% extends "main/base.html" %}
+
+{% block title %} Важное в Плазме {% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row flex-column flex-md-row gy-2">
+        <div class="col">
+            <a href="{% url 'create_checklist_plazma' %}">
+                <button class="btn btn-success w-100">Чек-лист</button>
+            </a>
+        </div>
+        <div class="col">
+            <a href="{% url 'custom_mov_product_list' from_dep='plazma' to_dep='service' %}">
+                <button class="btn btn-primary w-100">Сервис</button>
+            </a>
+        </div>
+        <div class="col">
+            <a href="{% url 'custom_mov_product_list' from_dep='plazma' to_dep='mall' %}">
+                <button class="btn btn-primary w-100">Молл</button>
+            </a>
+        </div>
+        <div class="col">
+            <a href="{% url 'custom_mov_product_list' from_dep='plazma' to_dep='nagornoe' %}">
+                <button class="btn btn-primary w-100">Нагорное</button>
+            </a>
+        </div>
+        <div class="col">
+            <a href="{% url 'custom_mov_product_list' from_dep='plazma' to_dep='plazma' %}">
+                <button class="btn btn-warning w-100">Витрина</button>
+            </a>
+        </div>
+        <div class="col">
+            <a href="{% url 'check_sale_plazma' %}">
+                <button class="btn btn-danger w-100">Продажи</button>
+            </a>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

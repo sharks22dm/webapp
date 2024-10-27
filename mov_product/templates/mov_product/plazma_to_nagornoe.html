@@ -1,0 +1,145 @@
+{% extends "main/base.html" %}
+
+{% block title %} Из Плазмы в Нагорное {% endblock %}
+
+{% block content %}
+<h5>Из Плазмы в Нагорное</h5>
+<div class="container">
+    <div class="row row-cols-1 row-cols-lg-2">
+        <div class="col">
+            <h5>Ожидает сборки</h5>
+            {% if products %}
+            {% for n in products %}
+            {% if n.status == 'Ожидает сборки' %}
+            <div class="alert alert-dark">
+                <p>{{ n.product }} - {{ n.total }}</p>
+                <form id="edit-form-{{ n.id }}" method="post" action="{% url 'update_status_sobrano' n.id %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Собрано</button>
+                </form>
+                <div class="d-flex justify-content-between mt-2">
+                    <a href="{% url 'position_update' n.id %}">
+                        <button style="background: none; border: none;">Редактировать</button>
+                    </a>
+                    <form id="delete-form-{{ n.id }}" method="post" action="{% url 'position_delete' n.id %}">
+                        {% csrf_token %}
+                        <button type="submit" style="background: none; border: none;">Удалить</button>
+                    </form>
+                </div>
+            </div>
+            <script>
+                document.getElementById('edit-form-{{ n.id }}').addEventListener('submit', function(event) {
+                    event.preventDefault();
+                    fetch('{% url 'update_status_sobrano' n.id %}', {
+                        method: 'POST',
+                        headers: {
+                            'X-CSRFToken': '{{ csrf_token }}',
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({})
+                    }).then(function(response) {
+                        if (response.ok) {
+                            location.reload(); // Обновление текущей страницы после успешного обновления
+                        } else {
+                            // Обработка ошибки
+                        }
+                    }).catch(function(error) {
+                        // Обработка ошибки
+                    });
+                });
+            </script>
+            <script>
+                document.getElementById('delete-form-{{ n.id }}').addEventListener('submit', function(event) {
+                    event.preventDefault();
+                    fetch('{% url 'position_delete' n.id %}', {
+                        method: 'POST',
+                        headers: {
+                            'X-CSRFToken': '{{ csrf_token }}',
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({})
+                    }).then(function(response) {
+                        if (response.ok) {
+                            location.reload(); // Обновление текущей страницы после успешного обновления
+                        } else {
+                            // Обработка ошибки
+                        }
+                    }).catch(function(error) {
+                        // Обработка ошибки
+                    });
+                });
+            </script>
+            {% endif %}
+            {% endfor %}
+            {% endif %}
+        </div>
+        <div class="col">
+            <h5>Собрано</h5>
+            {% if products %}
+            {% for n in products %}
+            {% if n.status == 'Собрано' %}
+            <div class="alert alert-dark">
+                <p>{{ n.product }} - {{ n.total }}</p>
+                <form id="delete-form-{{ n.id }}" method="post" action="{% url 'position_delete' n.id %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger" style="width: 100%;">Удалить</button>
+                </form>
+                <div class="d-flex justify-content-between mt-2">
+                    <a href="{% url 'position_update' n.id %}">
+                        <button style="background: none; border: none;">Редактировать</button>
+                    </a>
+                    <form id="edit-form-{{ n.id }}" method="post" action="{% url 'update_status_back' n.id %}">
+                        {% csrf_token %}
+                        <button type="submit" style="background: none; border: none;">Вернуть</button>
+                    </form>
+                </div>
+            </div>
+            <script>
+                document.getElementById('edit-form-{{ n.id }}').addEventListener('submit', function(event) {
+                    event.preventDefault();
+                    fetch('{% url 'update_status_back' n.id %}', {
+                        method: 'POST',
+                        headers: {
+                            'X-CSRFToken': '{{ csrf_token }}',
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({})
+                    }).then(function(response) {
+                        if (response.ok) {
+                            location.reload(); // Обновление текущей страницы после успешного обновления
+                        } else {
+                            // Обработка ошибки
+                        }
+                    }).catch(function(error) {
+                        // Обработка ошибки
+                    });
+                });
+            </script>
+            <script>
+                document.getElementById('delete-form-{{ n.id }}').addEventListener('submit', function(event) {
+                    event.preventDefault();
+                    fetch('{% url 'position_delete' n.id %}', {
+                        method: 'POST',
+                        headers: {
+                            'X-CSRFToken': '{{ csrf_token }}',
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({})
+                    }).then(function(response) {
+                        if (response.ok) {
+                            location.reload(); // Обновление текущей страницы после успешного обновления
+                        } else {
+                            // Обработка ошибки
+                        }
+                    }).catch(function(error) {
+                        // Обработка ошибки
+                    });
+                });
+            </script>
+            {% endif %}
+            {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

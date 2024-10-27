@@ -1,0 +1,34 @@
+{% extends "main/base.html" %}
+
+{% block title %} Создать перемещение товара {% endblock %}
+
+{% block content %}
+<div class="card bg-dark text-light border-0">
+    <form method="post">
+        {% csrf_token %}
+        <div class="col-md-6 offset-md-3 col-12" style="padding: 10px;">
+            <div style="display: flex; justify-content: space-between;">
+                <div style="width: 48%;">
+                    {{ form.from_dep }}
+                </div>
+                <div style="width: 48%;">
+                    {{ form.to_dep }}
+                </div>
+            </div>
+            <br>
+            {{ form.product }}<br>
+            <div style="display: flex; justify-content: space-between;">
+                <div style="width: 16%;">
+                    {{ form.total }}
+                </div>
+                <div style="width: 36%;">
+                    {{ form.status }}
+                </div>
+                <div style="width: 40%;">
+                    <button type="submit" class="btn btn-success" style="width: 100%;">Создать</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}

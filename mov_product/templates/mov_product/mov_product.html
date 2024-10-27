@@ -1,0 +1,54 @@
+{% extends "main/base.html" %}
+
+{% block title %} Перемещение товара {% endblock %}
+
+{% block content %}
+Перемещение товара<br>
+<a href="{% url 'create_mov_product' %}">
+    <button class="btn btn-success">Заказать товар</button>
+</a>
+<br>
+<br>
+<a href="{% url 'custom_mov_product_list' from_dep='service' to_dep='mall' %}">
+    <button class="btn btn-primary">Из Сервиса в Молл</button>
+</a>
+<a href="{% url 'custom_mov_product_list' from_dep='service' to_dep='plazma' %}">
+    <button class="btn btn-primary">Из Сервиса в Плазму</button>
+</a>
+<a href="{% url 'custom_mov_product_list' from_dep='service' to_dep='nagornoe' %}">
+    <button class="btn btn-primary">Из Сервиса в Нагорное</button>
+</a>
+<br>
+<br>
+<a href="{% url 'custom_mov_product_list' from_dep='mall' to_dep='service' %}">
+    <button class="btn btn-primary">Из Молла в Сервис</button>
+</a>
+<a href="{% url 'custom_mov_product_list' from_dep='mall' to_dep='plazma' %}">
+    <button class="btn btn-primary">Из Молла в Плазму</button>
+</a>
+<a href="{% url 'custom_mov_product_list' from_dep='mall' to_dep='nagornoe' %}">
+    <button class="btn btn-primary">Из Молла в Нагорное</button>
+</a>
+<br>
+<br>
+<a href="{% url 'custom_mov_product_list' from_dep='plazma' to_dep='service' %}">
+    <button class="btn btn-primary">Из Плазмы в Сервис</button>
+</a>
+<a href="{% url 'custom_mov_product_list' from_dep='plazma' to_dep='mall' %}">
+    <button class="btn btn-primary">Из Плазмы в Молл</button>
+</a>
+<a href="{% url 'custom_mov_product_list' from_dep='plazma' to_dep='nagornoe' %}">
+    <button class="btn btn-primary">Из Плазмы в Нагорное</button>
+</a>
+<br>
+<br>
+<a href="{% url 'custom_mov_product_list' from_dep='nagornoe' to_dep='service' %}">
+    <button class="btn btn-primary">Из Нагорного в Сервис</button>
+</a>
+<a href="{% url 'custom_mov_product_list' from_dep='nagornoe' to_dep='mall' %}">
+    <button class="btn btn-primary">Из Нагорного в Молл</button>
+</a>
+<a href="{% url 'custom_mov_product_list' from_dep='nagornoe' to_dep='plazma' %}">
+    <button class="btn btn-primary">Из Нагорного в Плазму</button>
+</a>
+{% endblock %}

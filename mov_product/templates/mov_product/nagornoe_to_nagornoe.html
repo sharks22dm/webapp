@@ -1,0 +1,48 @@
+{% extends "main/base.html" %}
+
+{% block title %} Проверка витрины {% endblock %}
+
+{% block content %}
+<h5>Проверка витрины</h5>
+<div class="container">
+    <div class="row row-cols-1 row-cols-lg-2">
+        <div class="col">
+            {% if products %}
+            {% for n in products %}
+            {% if n.status == 'Ожидает сборки' %}
+            <div class="alert alert-dark">
+                <p>{{ n.product }} - {{ n.total }}</p>
+                <form id="delete-form-{{ n.id }}" method="post" action="{% url 'position_delete' n.id %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger" style="width: 100%;">Удалить</button>
+                </form>
+            </div>
+            <script>
+                document.getElementById('delete-form-{{ n.id }}').addEventListener('submit', function(event) {
+                    event.preventDefault();
+                    fetch('{% url 'position_delete' n.id %}', {
+                        method: 'POST',
+                        headers: {
+                            'X-CSRFToken': '{{ csrf_token }}',
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({})
+                    }).then(function(response) {
+                        if (response.ok) {
+                            location.reload(); // Обновление текущей страницы после успешного обновления
+                        } else {
+                            // Обработка ошибки
+                        }
+                    }).catch(function(error) {
+                        // Обработка ошибки
+                    });
+                });
+            </script>
+            {% endif %}
+            {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+</div>
+</div>
+{% endblock %}
